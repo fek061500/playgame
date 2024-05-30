@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>打地鼠</title>
+
+    <!-- 引入css样式 -->
+    <link rel="stylesheet" href="/打地鼠.css" />
+
+    <!-- 引入小图标 -->
+    <link rel="shortcut icon" href="/打地鼠.png" />
+  </head>
+
+  <body onclick="clickM()">
+    <audio src="/video/play.mp3" id="clickM"></audio>
+
+    <h1
+      style="
+        font-weight: bolder;
+        text-align: center;
+        margin-bottom: 1%;
+        color: red;
+      "
+    >
+      打地鼠游戏
+    </h1>
+
+    <h2 style="text-align: center; margin-bottom: 1%" id="score">
+      成绩为：0分
+    </h2>
+
+    
+
+    <div class="container" id="container">
+      <!-- <div class="hold"></div> -->
+    </div>
+  </body>
+
+  <script>
+    var boxList = [];
+
+    var scoreValue = 0;
+
+    // 创建循环盒子div
+    for (var i = 0; i < 9; i++) {
+      // 创建div标签
+      var minBox = document.createElement("div");
+
+      // 添加类名
+      minBox.classList.add("hold");
+
+      // 将新建div 添加到父容器 container
+      document.getElementById("container").appendChild(minBox);
+
+      boxList.push(minBox);
+    }
+
+    document.body.onmousedown = function () {
+      var play = new Audio("/video/play.mp3");
+      play.play();
+
+      document.body.style.cursor = "url('/imgs/chuizi2.png'),none";
+      // document.body.style.cursor.transform = "rotate(90deg)";
+    };
+
+    document.body.onmouseup = function () {
+      document.body.style.cursor = "url('/imgs/chuizi.png'),none";
+      // document.body.style.cursor.transform = "rotate(90deg)";
+      boxList[index].style.background =
+        "#dac09b url('/imgs/no.png') no-repeat center center";
+
+      // boxList[index].style.background =
+      //   "#dac09b url('/playgame/imgs/yes.png') no-repeat center center";
+    };
+
+    // 定时器： 每隔一段时间要执行一段业务代码  定时任务
+    setInterval(function () {
+      var index = Math.floor(Math.random() * boxList.length);
+
+      var select = Math.floor(Math.random() * 4);
+
+      var playMusic = document.getElementById("clickM");
+
+      if (select == 0) {
+        boxList[index].style.background =
+          "#dac09b url('/imgs/fal.gif') no-repeat center center";
+
+        // playMusic.src = "/playgame/video/no.mp3";
+        boxList[index].onclick = function () {
+          document.getElementById("score").innerText =
+            "成绩为：" + --scoreValue + "分";
+
+          var cuowu = new Audio("/video/no.mp3");
+          cuowu.play();
+
+          boxList[index].style.background =
+            "#dac09b url('/playgame/imgs/no.png') no-repeat center center";
+
+          // 去掉点击事件，不然可以一直点击
+          boxList[index].onclick = null;
+        };
+      } else {
+        boxList[index].style.background =
+          "#dac09b url('/imgs/sth.png') no-repeat center center";
+
+        // playMusic.src = "/playgame/video/ok.mp3";
+
+        boxList[index].onclick = function () {
+          document.getElementById("score").innerText =
+            "成绩为：" + ++scoreValue + "分";
+
+          var cuowu = new Audio("/video/ok.mp3");
+          cuowu.play();
+
+          boxList[index].style.background =
+            "#dac09b url('/imgs/yes.png') no-repeat center center";
+
+          boxList[index].onclick = null;
+        };
+
+        // boxList[index].style.background = null;
+      }
+
+      // 超过 1秒 做出什么内容
+      setTimeout(function () {
+        boxList[index].style.background = null;
+      }, 1000);
+    }, 1000);
+  </script>
+</html>

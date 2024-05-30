@@ -1,0 +1,51 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /* 防拖动、防选中 */
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+
+  cursor: url("/playgame/imgs/chuizi.png"), auto;
+
+  margin-top: 2%;
+}
+
+.container {
+  width: 600px;
+  height: 600px;
+
+  background: #fff8dd;
+
+  /* background: url(/playgame/imgs/bg.jpg) no-repeat bottom; */
+  margin: 0 auto;
+
+  /* 开启弹性布局 */
+  display: flex;
+
+  /* 让里面的容器不变形 */
+  flex-wrap: wrap;
+
+  /* flex-direction: column; */
+
+  /* 均匀分布，两端对齐 */
+  justify-content: space-between;
+
+  /* 垂直两端对齐 */
+  align-content: space-between;
+}
+
+.hold {
+  width: 30%;
+  height: 30%;
+  /* background: hotpink; */
+  background: #dac09b url("/playgame/imgs/begin.png") no-repeat center center;
+  /* background-size: cover; */
+  /* background-position: center center; */
+
+  box-shadow: 0px 0px 10px #aaa;
+
+  border-radius: 50%;
+}
